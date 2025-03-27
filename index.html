@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRS PANEL - BOOST MODE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            background-color: black;
+        }
+
+        /* Background animasi kode */
+        .code-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .code {
+            position: absolute;
+            color: rgba(0, 255, 0, 0.8);
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
+            opacity: 0.6;
+            animation: moveCode 10s linear infinite;
+        }
+
+        @keyframes moveCode {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            100% { transform: translateY(100vh); opacity: 1; }
+        }
+
+        .box {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            width: 320px;
+            margin: auto;
+            box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.5);
+            border: 2px solid rgba(0, 255, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            color: #00ff00;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #111;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            outline: none;
+        }
+
+        button {
+            background: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #00ff00;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00cc00;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .feature {
+            display: flex;
+            justify-content: space-between;
+            background: #222;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #00ff00;
+            box-shadow: 0px 0px 10px #00ff00;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: gray;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #00ff00;
+            box-shadow: 0px 0px 10px #00ff00;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(14px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="code-background">
+        <div class="code" style="left: 5%; animation-duration: 8s;">if (player.aim) { player.autoHeadshot(); }</div>
+        <div class="code" style="left: 20%; animation-duration: 6s;">console.log("VRS PANEL Boost Activated!");</div>
+        <div class="code" style="left: 40%; animation-duration: 7s;">player.speed = 2.5;</div>
+        <div class="code" style="left: 60%; animation-duration: 9s;">if (enemy.nearby) { autoShoot(); }</div>
+        <div class="code" style="left: 80%; animation-duration: 5s;">alert("AntiBan Mode: ON");</div>
+    </div>
+
+    <h2>⚡ VRS PANEL BOOST MODE ⚡</h2>
+
+    <div class="box" id="loginBox">
+        <h3>LOGIN</h3>
+        <input type="text" id="username" placeholder="Username (VRS PANEL)"><br>
+        <input type="password" id="password" placeholder="Password (VRS PANEL)"><br>
+        <button onclick="login()">🚀 SIGN IN</button>
+    </div>
+
+    <div class="box panel" id="panel">
+        <h3>🔹 MENU PANEL 🔹</h3>
+        
+        <div class="feature">
+            <span>🎯 Aim Lock FF 100%</span>
+            <label class="switch">
+                <input type="checkbox" id="aimlock">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="feature">
+            <span>🛡️ Fitur Antiband</span>
+            <label class="switch">
+                <input type="checkbox" id="antiband">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="feature">
+            <span>🔫 Aimlock + Stabilizer</span>
+            <label class="switch">
+                <input type="checkbox" id="aimlock_stabilizer">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <button onclick="logout()">🔴 LOGOUT</button>
+    </div>
+
+    <script>
+        document.getElementById("loginBox").style.display = "block";
+
+        function login() {
+            var user = document.getElementById("username").value;
+            var pass = document.getElementById("password").value;
+            if (user === "VRS PANEL" && pass === "VRS PANEL") {
+                document.getElementById("loginBox").style.display = "none";
+                document.getElementById("panel").style.display = "block";
+            } else {
+                alert("❌ Username atau password salah!");
+            }
+        }
+
+        function logout() {
+            document.getElementById("panel").style.display = "none";
+            document.getElementById("loginBox").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
